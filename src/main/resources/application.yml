@@ -1,0 +1,34 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: currency-exchange-system
+  datasource:
+    url: jdbc:postgresql://localhost:5432/currency_exchange
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          issuer-uri: https://your-auth-server.com
+
+logging:
+  level:
+    root: INFO
+    com.example.currencyexchange: DEBUG
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
