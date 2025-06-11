@@ -6,8 +6,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "requests")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Request {
@@ -22,4 +21,6 @@ public class Request {
     private String status;
     private String payType;
     private LocalDateTime registeredAt;
+    private String userName;
+    private String userNationalCode;
 }

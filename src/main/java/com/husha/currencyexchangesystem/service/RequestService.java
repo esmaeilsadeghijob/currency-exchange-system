@@ -15,11 +15,6 @@ public class RequestService {
         this.requestRepository = requestRepository;
     }
 
-    public Request getRequestDetails(String uuid) {
-        return requestRepository.findById(Long.parseLong(uuid))
-                .orElseThrow(() -> new RuntimeException("درخواست یافت نشد"));
-    }
-
     public List<RequestDto> getAllRequests(String status) {
         List<Request> requests = requestRepository.findByStatus(status);
         return requests.stream().map(this::convertToDto).toList();
@@ -29,10 +24,20 @@ public class RequestService {
         Request request = requestRepository.findByUuid(uuid)
                 .orElseThrow(() -> new RuntimeException("درخواست یافت نشد"));
 
-        return convertToDto(request);
+        return convertToDetailsDto(request);
     }
 
-    private RequestDetailsDto convertToDto(Request request) {
+    private RequestDto convertToDto(Request request) {
+        RequestDto dto = new RequestDto();
+        dto.setUuid(request.getUuid());
+        dto.setCurrencySymbol(request.getCurrencySymbol());
+        dto.setStatus(request.getStatus());
+        dto.setPayType(request.getPayType());
+        dto.setRegisteredAt(request.getRegisteredAt().toString());
+        return dto;
+    }
+
+    private RequestDetailsDto convertToDetailsDto(Request request) {
         RequestDetailsDto dto = new RequestDetailsDto();
         dto.setUuid(request.getUuid());
         dto.setCurrencySymbol(request.getCurrencySymbol());
@@ -43,6 +48,4 @@ public class RequestService {
         dto.setUserNationalCode(request.getUserNationalCode());
         return dto;
     }
-
-
 }

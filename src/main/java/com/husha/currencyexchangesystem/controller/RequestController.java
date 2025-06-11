@@ -23,11 +23,9 @@ public class RequestController {
         return ResponseEntity.ok(requestDtos);
     }
 
-
     @GetMapping("/show/{uuid}")
     public ResponseEntity<RequestDetailsDto> getRequestDetails(@PathVariable String uuid) {
         RequestDetailsDto requestDetails = requestService.getRequestDetails(uuid);
         return ResponseEntity.ok(requestDetails);
     }
-
 }
